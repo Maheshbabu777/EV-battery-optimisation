@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confusion Matrix</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        img {
+            width: 364px;
+            height: 362px;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+    <script>
+        async function fetchAccuracy() {
+            try {
+                const response = await fetch('/confusion_matrix');
+                const data = await response.json();
+                document.getElementById('accuracy-text').textContent = `Model Accuracy: ${data.accuracy}%`;
+            } catch (error) {
+                document.getElementById('accuracy-text').textContent = "Error fetching accuracy";
+            }
+        }
+        fetchAccuracy();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img id="confMatrixImage" src="/static/confusion_matrix.png">
+        <p id="accuracy-text">Model Accuracy: %</p>
+        <br>
+        <button onclick="window.location.href='/'">Go Home</button>
+    </div>
+</body>
+</html>

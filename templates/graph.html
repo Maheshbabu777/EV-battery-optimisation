@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Degradation Graph</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        async function loadGraph() {
+            const response = await fetch("/graph");
+            const result = await response.json();
+            document.getElementById("graphImage").src = result.graph ? "data:image/png;base64," + result.graph : "";
+        }
+        window.onload = loadGraph;
+    </script>
+</head>
+<body>
+    <div class="container">
+    <h1>Battery Degradation vs Charging Cycles</h1>
+    <img id="graphImage" src="" alt="Graph Loading..." width="600">
+    <br>
+    <br>
+    <img id="confMatrixImage" src="/static/train_test_graph.png">
+    <button onclick="window.location.href='/'">Back to Home</button>
+    </div>
+</body>
+</html>
